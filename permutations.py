@@ -1,11 +1,9 @@
-import sys, math
+import sys
 
 
 def permutation(input, index):
-    result = []
-    insert_sequence = [index % x for x in range(1,len(input)+1)]
-    i = 0
-    for insert_index in insert_sequence:
+    result, i = [], 0
+    for insert_index in [index % x for x in range(1,len(input)+1)]:
         result.insert(insert_index, input[i])
         i += 1
     return result
@@ -26,3 +24,5 @@ if __name__ == "__main__":
     for p in permutations_generator(input):
         print(i, p)
         i += 1
+
+    #print(''.join(permutation(input, 10)))
