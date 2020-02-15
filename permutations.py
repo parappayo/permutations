@@ -1,16 +1,28 @@
-import sys
-from typing import List
+import sys, math
 
 
-def permutations(input: List[int]) -> List[int]:
+def permutation(input, index):
+    result = []
+    insert_sequence = [index % x for x in range(1,len(input)+1)]
+    i = 0
+    for insert_index in insert_sequence:
+        result.insert(insert_index, input[i])
+        i += 1
+    return result
+
+
+def permutations_generator(input):
     if len(input) < 2:
         yield input
         return
-    for sub_perm in permutations(input[1:]):
+    for sub_perm in permutations_generator(input[1:]):
         for i in range(len(input)):
-            yield sub_perm[:i] + input[0:1] + sub_perm[i:]
+            yield sub_perm[:i] + input[:1] + sub_perm[i:]
 
 
 if __name__ == "__main__":
-    for p in permutations(sys.argv[1]):
-    	print(p)
+    input = sys.argv[1]
+    i = 0
+    for p in permutations_generator(input):
+        print(i, p)
+        i += 1
